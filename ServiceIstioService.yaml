@@ -1,0 +1,46 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: service-istio-vs
+  namespace: istio0322
+spec:
+  hosts:
+  - service-k8s-svc
+  http:
+  - match:
+    - headers:
+        color:
+          exact: red
+    route:
+    - destination:
+        host: service-k8s-svc
+        subset: sub-v1
+  - match:
+    - headers:
+        color:
+          exact: yellow
+    route:
+    - destination:
+        host: service-k8s-svc
+        subset: sub-v2
+  - match:
+    - headers:
+        color:
+          exact: blue
+    route:
+    - destination:
+        host: service-k8s-svc
+        subset: sub-v3
+  - route: 
+    - destination:
+        host: service-k8s-svc
+        subset: sub-v1
+      weight: 33
+    - destination:
+        host: service-k8s-svc
+        subset: sub-v2
+      weight: 33
+    - destination:
+        host: service-k8s-svc
+        subset: sub-v3
+      weight: 34

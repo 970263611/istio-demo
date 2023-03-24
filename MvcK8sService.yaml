@@ -1,0 +1,19 @@
+#service配置
+apiVersion: v1
+kind: Service
+metadata:
+ name: mvc-k8s-svc
+ namespace: istio0322
+spec:
+ ports:
+ #以下为端口映射设置
+    #端口配置组名
+  - name: http-mvc-k8s
+    #service开放的端口
+    port: 10001
+    #容器内端口
+    targetPort: 2000
+    #对集群外暴漏的端口
+ selector:
+  app: demo-mvc
+ #service类型 默认clusterIp

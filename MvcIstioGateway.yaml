@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: mvc-istio-gateway
+  namespace: istio0322
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 10001
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"

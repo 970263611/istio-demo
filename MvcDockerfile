@@ -1,0 +1,6 @@
+#添加jdk8镜像依赖
+FROM openjdk:8
+#指定启动文件
+ADD jar/mvc.jar mvc.jar
+#设置端口
+EXPOSE 2000

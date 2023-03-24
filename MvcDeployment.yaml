@@ -1,0 +1,38 @@
+#以下为pod配置
+apiVersion: apps/v1
+#pod类型
+kind: Deployment
+#元数据信息
+metadata:
+ #Deployment名字
+ name: mvc-deployment
+ #所在命名空间
+ namespace: istio0322
+spec:
+ #启动服务分片个数
+ replicas: 1
+ selector:
+  #标签
+  matchLabels: 
+   app: demo-mvc
+ #模板
+ template:
+  metadata:
+   #匹配service的标签
+   labels:
+    app: demo-mvc
+    version: v1
+    #以下为镜像库设置
+  spec:
+   containers:
+   - image: demomvc:v1
+     name: demomvc
+     imagePullPolicy: IfNotPresent
+     #设置pod资源和容器端口号
+     resources:
+      limits:
+        cpu: "0.1"
+        memory: 128Mi
+     ports:
+      - containerPort: 2000
+     command: ["java","-jar","mvc.jar"]

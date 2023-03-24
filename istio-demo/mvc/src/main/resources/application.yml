@@ -1,0 +1,5 @@
+server:
+  port: 2000
+service:
+  address: service-k8s-svc:10002
+  #address: localhost:3000

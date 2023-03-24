@@ -1,0 +1,37 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: mvc-istio-vs
+  namespace: istio0322
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - istio0322/mvc-istio-gateway
+  http:
+  - match:
+    - queryParams:
+        color:
+          exact: white
+    - queryParams:
+        color:
+          exact: red
+    - queryParams:
+        color:
+          exact: yellow
+    - queryParams:
+        color:
+          exact: blue
+    route:
+    - destination:
+        host: mvc-k8s-svc
+  - match:
+    - uri:
+        prefix: /headerTest
+    route:
+    - destination:
+        host: mvc-k8s-svc
+      headers:
+        request:
+         set:
+          test-header: "0322"
