@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: demo-gateway
+  namespace: istio0331
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 10009
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"

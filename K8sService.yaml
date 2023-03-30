@@ -1,0 +1,19 @@
+#service配置
+apiVersion: v1
+kind: Service
+metadata:
+ name: demo-svc
+ namespace: istio0331
+spec:
+ ports:
+ #以下为端口映射设置
+    #端口配置组名
+  - name: http-demo-k8s
+    #service开放的端口
+    port: 10009
+    #容器内端口
+    targetPort: 9000
+    #对集群外暴漏的端口
+ selector:
+  app: demo-service
+ #service类型 默认clusterIp

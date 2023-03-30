@@ -1,0 +1,39 @@
+#以下为pod配置
+apiVersion: apps/v1
+#pod类型
+kind: Deployment
+#元数据信息
+metadata:
+ #Deployment名字
+ name: demo-deployment-v2
+ #所在命名空间
+ namespace: istio0331
+spec:
+ #启动服务分片个数
+ replicas: 1
+ selector:
+  #标签和下面的模板labels是对应的
+  matchLabels: 
+   app: demo-service
+ #模板
+ template:
+  metadata:
+   #匹配service的标签
+   labels:
+    app: demo-service
+    version: v2
+    #以下为镜像库设置
+  spec:
+   containers:
+   - image: service0331:v1
+     name: service0331
+     imagePullPolicy: IfNotPresent
+     #设置pod资源和容器端口号
+     resources:
+      limits:
+        cpu: "0.1"
+        memory: 128Mi
+     ports:
+      - containerPort: 9000
+     #启动指令，在k8s指定
+     command: ["java","-jar","-Dversion=v2","service0331.jar"]

@@ -1,0 +1,14 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: demo-rule
+  namespace: istio0331
+spec:
+  host: demo-svc
+  subsets:
+  - name: sub-v1
+    labels:
+      version: v1
+  - name: sub-v2
+    labels:
+      version: v2

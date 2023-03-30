@@ -1,6 +1,6 @@
 #添加jdk8镜像依赖
 FROM openjdk:8
 #指定启动文件
-ADD jar/istiotest.jar service0331.jar
+ADD jar/service.jar service.jar
 #设置端口
-EXPOSE 9000
+EXPOSE 3000

@@ -1,0 +1,46 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: demo-vs
+  namespace: istio0331
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - istio0331/demo-gateway
+  http:
+  - match:
+    - queryParams:
+        username:
+          exact: zhangsan
+    route: 
+    - destination:
+        host: demo-svc
+        subset: sub-v1
+  - match:
+    - queryParams:
+        username:
+          exact: lisi
+    route: 
+    - destination:
+        host: demo-svc
+        subset: sub-v2
+  - match:
+    - uri:
+        prefix: /headerAdd
+    route:
+    - destination:
+        host: demo-svc
+      headers:
+        request:
+         set:
+          headerAdd: "0331PM.share"
+  - route: 
+    - destination:
+        host: demo-svc
+        subset: sub-v1
+      weight: 80
+    - destination:
+        host: demo-svc
+        subset: sub-v2
+      weight: 20
