@@ -1,0 +1,8 @@
+server:
+  port: 3001
+
+spring:
+  dubbo:
+    appname: dubbo2
+    registry: N/A
+    port: 3000

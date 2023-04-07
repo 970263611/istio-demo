@@ -1,0 +1,10 @@
+server:
+  port: 2000
+
+dubbo:
+  service:
+    address: com.demo.UserService-dubbo://localhost:3000;
+spring:
+  dubbo:
+    appname: dubbo1
+    registry: N/A
